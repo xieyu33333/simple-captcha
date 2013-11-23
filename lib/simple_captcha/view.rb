@@ -63,8 +63,8 @@ module SimpleCaptcha #:nodoc
         
         query = defaults.collect{ |key, value| "#{key}=#{value}" }.join('&')
         url = "#{ENV['RAILS_RELATIVE_URL_ROOT']}/simple_captcha?code=#{simple_captcha_key}&#{query}".gsub(/&time=\d*/,"")
-        
-        tag('img', :src => url, :alt => 'captcha')
+        true_url = url.gsub(/&time=\d*/,"")
+        tag('img', :src => true_url, :alt => 'captcha')
       end
       
       def simple_captcha_field(options={})
